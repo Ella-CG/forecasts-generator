@@ -8,12 +8,13 @@ function getRandomNumber(min, max) {
     return Math.floor(Math.random() * (max - min) + min);
 }
 
-forecastBtn.addEventListener('click', function() {
+function addForecast() {
+
     const forecastNumber = getRandomNumber(1, 4);
 
     function doForecast() {
 
-        let predictionNumber = forecastNumber;
+        const predictionNumber = forecastNumber;
         let predictionText = "";
 
         if (predictionNumber == 1) {
@@ -25,6 +26,7 @@ forecastBtn.addEventListener('click', function() {
         }
         return predictionText;
     }
+
 
     const newForecast = doForecast(forecastNumber);
     forecast.textContent = newForecast;
@@ -42,13 +44,16 @@ forecastBtn.addEventListener('click', function() {
 
         return myForecast;
     }
-
     const forecastList = makeForecastByTemplate(newForecast, newProbability);
     forecastsContainer.prepend(forecastList);
+}
+
+
+forecastBtn.addEventListener('click', addForecast);
 
 
 
-})
+
 
 
 /* Генерация предсказания должна происходить при клике на кнопку «предсказать судьбу» */
