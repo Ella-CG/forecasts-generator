@@ -8,43 +8,37 @@ function getRandomNumber(min, max) {
     return Math.floor(Math.random() * (max - min) + min);
 }
 
+function makeForecastByTemplate(newForecast, newProbability) {
+    const forecastItem = document.querySelector("#forecast-item");
+    const myForecast = forecastItem.content.cloneNode(true);
+
+    myForecast.querySelector('h3').textContent = newForecast;
+    myForecast.querySelector('p').textContent = `Вероятность: ${newProbability}  %`;
+
+    return myForecast;
+}
+
 function addForecast() {
 
     const forecastNumber = getRandomNumber(1, 4);
 
-    function doForecast() {
+    const predictionNumber = forecastNumber;
+    let predictionText = "";
 
-        const predictionNumber = forecastNumber;
-        let predictionText = "";
-
-        if (predictionNumber == 1) {
-            predictionText = "Сегодня будет отличный день!";
-        } else if (predictionNumber == 2) {
-            predictionText = "Твое желание исполнится!";
-        } else {
-            predictionText = "Ты поедешь в прекрасное путешествие!";
-        }
-        return predictionText;
+    if (predictionNumber == 1) {
+        predictionText = "Сегодня будет отличный день!";
+    } else if (predictionNumber == 2) {
+        predictionText = "Твое желание исполнится!";
+    } else {
+        predictionText = "Ты поедешь в прекрасное путешествие!";
     }
 
-
-    const newForecast = doForecast(forecastNumber);
-    forecast.textContent = newForecast;
+    forecast.textContent = predictionText;
 
     const newProbability = getRandomNumber(1, 100);
     forecastProbability.textContent = `Вероятность: ${newProbability}  %`;
 
-    const forecastItem = document.querySelector("#forecast-item");
-
-    function makeForecastByTemplate(newForecast, newProbability) {
-        const myForecast = forecastItem.content.cloneNode(true);
-
-        myForecast.querySelector('h3').textContent = newForecast;
-        myForecast.querySelector('p').textContent = `Вероятность: ${newProbability}  %`;
-
-        return myForecast;
-    }
-    const forecastList = makeForecastByTemplate(newForecast, newProbability);
+    const forecastList = makeForecastByTemplate(predictionText, newProbability);
     forecastsContainer.prepend(forecastList);
 }
 
